@@ -25,7 +25,7 @@ const getList = async (start, count) => {
         + ' WHERE is_active=1 AND is_deleted=0'
         + ' ORDER BY articles.id DESC LIMIT ?, ?';
     ret = await runQuery(sql, [start, count]);
-    ret.forEach(article => { replaceDate(article); });
+    ret.forEach(replaceDate);
     return ret;
 };
 
@@ -52,7 +52,8 @@ const getByIdAndAuthor = async (id, author) => {
 const create = async (title, content, author) => {
     const sql = 'INSERT INTO articles (title, content, author)'
         + ' VALUES (?, ?, ?)';
-    await runQuery(sql, [title, data, author.id]);
+    const result = await runQuery(sql, [title, content, author.id]);
+    return result.insertId;
 };
 
 const update = async (id, title, content) => {
