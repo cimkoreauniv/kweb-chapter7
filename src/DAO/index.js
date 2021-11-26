@@ -1,4 +1,4 @@
-const articleDAO = require('./article');
-const userDAO = require('./user');
+const ArticleDAO = require('./article');
+const UserDAO = require('./user');
 
-module.exports({ articleDAO, userDAO });
+module.exports = { ArticleDAO, UserDAO };
