@@ -21,7 +21,8 @@ const signIn = async (req, res, next) => {
         const user = await UserDAO.getByUsername(username);
         if (!user) throw new Error('UNAUTHORIZED');
 
-        const isValidPassword = verifyPassword(password, user.password);
+        const isValidPassword = await verifyPassword(password, user.password);
+        console.log(isValidPassword);
         if (!isValidPassword) throw new Error('UNAUTHORIZED');
 
         req.session.user = {
